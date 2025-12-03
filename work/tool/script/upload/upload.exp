@@ -1,0 +1,59 @@
+#!/usr/bin/expect
+
+if { [llength $argv] < 3 } {
+    puts "Usage:$argv0 ip username password"
+    exit 1
+}
+
+set timeout 20
+set ip [lindex $argv 0]
+set username [lindex $argv 1]
+set passwd [lindex $argv 2]
+set port [lindex $argv 3]
+system "rm -rf bin/etc"
+system "rm -rf bin/server/account_server/ServerNames.json"
+system "rm -rf ALD-Server.tar"
+
+proc waitFor {pass} {
+    set passwderror 0
+    expect {
+        "*assword:" {
+            if { ${passwderror} == 1 } {
+                puts "password is error"
+                exit 2
+            }
+
+            set timeout 1000
+            set passwderror 1
+            send "${pass}\r"
+            exp_continue
+        }
+        "*es/no?*" {
+            send "yes\r"
+            exp_continue
+        }
+        timeout {
+            puts "connect is timeout"
+            exit 3
+        }
+    }
+}
+
+#关闭服务器
+spawn ssh -p ${port} ${username}@${ip} "cd /data/ALD-Server && ./start -s all"
+waitFor ${passwd}
+
+#更新文件
+set updateFiles { "3rd" "common" "server" "start" "ald" }
+foreach file $updateFiles {
+    spawn scp -r bin/${file} ${username}@${ip}:/data/ALD-Server
+    waitFor ${passwd}
+}
+
+#修改main.js的IP
+spawn cd /data/ALD-Server && sed -i "s/127.0.0.1/${ip}/g" server/monitor_server/html/js/main.js
+
+#启动服务器
+set passwderror 0
+spawn ssh -p ${port} ${username}@${ip} "cd /data/ALD-Server && ./start -w"
+waitFor ${passwd}

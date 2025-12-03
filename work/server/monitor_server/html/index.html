@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CO-Server Monitor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/ns-default.css" />
+    <link rel="stylesheet" type="text/css" href="css/ns-style-attached.css" />
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="css/cs-select.css" />
+    <link rel="stylesheet" type="text/css" href="css/cs-skin-rotate.css" />
+    <link rel="stylesheet" type="text/css" href="css/fancyInput.css">
+    <script src="js/modernizr.custom.js"></script>
+    <script src="js/main.js"></script>
+    <!-- jQuery Google CDN -->
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js"></script>
+</head>
+
+<body onload="loadServerList()" class="color-6">
+    <div class="container">
+        <header class="codrops-header">
+            <h1><span>CO 服务管理</span>CO Sever Manager</h1>
+            <nav class="codrops-demos">
+                <a onclick="selectServer()" id="a_select">服务器选择</a>
+                <a onclick="pmCmd()" id="a_pm">PM命令</a>
+                <a onclick="serverStatus()" id="a_status">服务器状态</a>
+                <a onclick="battleInfo()" id="a_battleInfo">战斗数据</a>
+                <a onclick="netdata()" id="a_netdata">监控数据</a>
+                <!--<a onclick="testcase()" id="a_testcase">执行自动测试</a>-->
+                <!--<a onclick="createEvE()" id="a_createEvE">模拟EVE战斗</a><br/>-->
+                <!--<a onclick="restartCluster()" id="a_restartCluster">重启集群服务器</a>-->
+                <a onclick="modifyData()" id="a_modifyData">修改数据库数据</a>
+                <!--<a onclick="exportSpriteData()" id="a_exportSpriteData">导出精灵问答数据</a>-->
+                <a onclick="reloadConfig()" id="a_reloadConfig">重载配置数据</a>
+                <!--<a onclick="closeServer()" id="a_closeServer">关闭服务器</a>-->
+                <a onclick="clickHotfix()" id="a_hotfix">执行热更</a>
+                <!--<a onclick="clickTransData()" id="a_transData">数据转换</a>-->
+                <!--<a onclick="clickRestartGameLine()" id="a_restartGameLine">重启游服线路</a>-->
+            </nav>
+        </header>
+        <section>
+            <script src="js/classie.js"></script>
+            <script src="js/notificationFx.js"></script>
+            <script src="js/fancyInput.js"></script>
+            <div id="selectDiv">
+                <label class="select-label" id="lableServerSelect">请选择服务器:</label>
+                <select id="serverListSelect" class="cs-select cs-skin-rotate" size="10">
+                    <option value="">--请选择--</option>
+                </select>
+            </div>
+            <br/><br/>
+            <div id="pmDiv">
+                <nav id="pmNav">
+                    
+                </nav>
+                <br/><br/><br/>
+                <label id="pmExplan"></label>
+                <br/><br/><br/>
+            </div>
+
+            <div id="pmInput">
+                
+            </div>
+
+            <div id="pmButton">
+                <div class="btn bubble left" id="run_pm" onclick="clickPMButton()">执行PM命令</div>
+            </div>
+
+            <div id="battleInfoDiv">
+                <label class="select-label" id="lablebattleInfo">请输入战斗索引(battleIndex):</label>
+                <input id="battleIndex"></input>
+                <div id="showBattleInfo"></div>
+                <div class="btn bubble left" id="run_battle" onclick="clickBattleInfo()">查询</div>
+            </div>
+            
+            <div id="serverInfoDiv">
+                <label id="serverTotalCMem"></label>
+                <label id="serverTotalOnlineCount"></label>
+                <div class="btn bubble left" id="refreshServerInfo" onclick="RefreshServerInfo()">刷新</div>
+            </div>
+            <table id="mainTable" class="bordered">
+                <thead>
+                    <tr>
+                        <th class="center" onclick="addrSort()">服务地址(addr)</th>
+                        <th class="center" onclick="nameSort()">服务名(name)</th>
+                        <th class="center" onclick="mqlenSort()">服务等待队列(mqlen)</th>
+                        <th class="center" onclick="taskSort()">服务任务队列(task)</th>
+                        <th class="center" onclick="lmemSort()">服务lua内存(lmem)</th>
+                        <th class="center" onclick="cmemSort()">服务C内存(cmem)</th>
+                        <th class="center" onclick="messageSort()">服务总消息数(message)</th>
+                        <th class="center" onclick="cpuSort()">服务cpu耗时(cpu)</th>
+                        <th class="center">服务耗时明细</th>
+                    </tr>
+                </thead>
+                <tbody id="mainTbody">
+                    
+                </tbody>
+            </table>
+            <pre id="testcaseLog"></pre>
+
+            <div id="createEvEDiv">
+                <label class="select-label">请输入玩家方战斗组:</label>
+                <input id="createEvEGroupDown"></input>
+                <label class="select-label">请输入怪物方战斗组:</label>
+                <input id="createEvEGroupUp"></input>
+                <label class="select-label">请输入战斗次数:</label>
+                <input id="createEvECount"></input>
+                <div class="btn bubble left" id="run_pm" onclick="ClickCreateEVE()">开始模拟</div>
+                <div id="createEvEDivResult">
+                    
+                </div>
+            </div>
+
+            <div id="restartClusterDiv">
+                <label class="select-label">请输入集群所属git分支(master,qa,develop):</label>
+                <input id="restartClusterBranch"></input>
+                <div class="btn bubble left" id="restart_cluster" onclick="ClickRestartCluster()">重启集群</div>
+            </div>
+
+            <div id="modifyDataDiv">
+                <label class="select-label">请输入表名:</label>
+                <input id="modifyDataTable"></input>
+                <label class="select-label">请输入主键值:</label>
+                <input id="modifyDataKey"></input>
+                <div class="btn bubble left" id="divQueryModifyData" onclick="QueryModifyData()">查询</div>
+                <div class="btn bubble left" id="divUpdateModifyData" onclick="UpdateModifyData()">更新</div>
+                <pre contenteditable="true" span style="color: #000000" id="modifyDataLable"></pre>
+            </div>
+
+            <div id="exportSpriteDataDiv">
+                <div class="btn bubble left" id="divexportSpriteData" onclick="ExportSpriteData()">导出</div>
+            </div>
+
+            <div id="reloadConfigDiv">
+                <div class="btn bubble left" id="divreloadConfig" onclick="ReloadConfig()">重置配置数据</div>
+            </div>
+
+            <div id="closeServerDiv">
+                <select id="closeTypeSelect">
+                    <option value=1 selected="selected">正常维护</option>
+                    <option value=2>紧急维护</option>
+                    <option value=3>超紧急维护</option>
+                </select>
+                <div class="btn bubble left" id="divcloseServer" onclick="CloseServer()">关闭服务器</div>
+            </div>
+
+            <div id="hotfixDiv">
+                <div class="btn bubble left" id="divhotfix" onclick="Hotfix()">执行热更</div>
+            </div>
+
+            <div id="transDataDiv">
+                <select id="tbTypeSelect">
+                    <option value="role" selected="selected">role</option>
+                    <option value="user">user</option>
+                    <option value="common">common</option>
+                </select>
+                <label class="select-label">请输入表名:</label>
+                <input id="transDataInput"></input>
+                <div class="btn bubble left" id="divtransDataJson" onclick="TransDataToJSON()">二进制转JSON</div>
+                <div class="btn bubble left" id="divtransDataData" onclick="TransJSONToData()">JSON转二进制</div>
+            </div>
+
+            <div id="restartGameLineDiv">
+                <div class="btn bubble left" id="divrestartGameLine" onclick="restartGameLine()">重启游服线路</div>
+            </div><!----九  零  一 起 玩 w w w . 9 0 1 7  5 . co m-------->
+
+            <script src="js/selectFx.js"></script>
+        </section>
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+360:C 15 Dec 17:33:34.697 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+360:C 15 Dec 17:33:34.698 # Redis version=4.0.11, bits=64, commit=54b17f98, modified=0, pid=360, just started
+360:C 15 Dec 17:33:34.699 # Configuration loaded
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 4.0.11 (54b17f98/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 56388
+ |    `-._   `._    /     _.-'    |     PID: 361
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+361:M 15 Dec 17:33:34.705 # Server initialized
+361:M 15 Dec 17:33:34.706 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+361:M 15 Dec 17:33:34.706 * Ready to accept connections
+337:C 15 Dec 17:37:05.780 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+337:C 15 Dec 17:37:05.782 # Redis version=4.0.11, bits=64, commit=54b17f98, modified=0, pid=337, just started
+337:C 15 Dec 17:37:05.782 # Configuration loaded
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 4.0.11 (54b17f98/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 56388
+ |    `-._   `._    /     _.-'    |     PID: 338
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+338:M 15 Dec 17:37:05.788 # Server initialized
+338:M 15 Dec 17:37:05.789 # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis. To fix this issue run the command 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' as root, and add it to your /etc/rc.local in order to retain the setting after a reboot. Redis must be restarted after THP is disabled.
+338:M 15 Dec 17:37:05.790 * Ready to accept connections
