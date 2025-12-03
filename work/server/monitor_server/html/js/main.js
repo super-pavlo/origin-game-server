@@ -1,4 +1,4 @@
-var monitorServerIp = "192.168.2.73"
+var monitorServerIp = "127.0.0.1"
 var monitorServerPort = 58111
 var monitorServerWebScoektPort = 10509
 var netdataPort = 19999
