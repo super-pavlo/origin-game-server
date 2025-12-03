@@ -48,7 +48,7 @@ skynet :
 	cd 3rd/skynet && git checkout service-src/service_snlua.c && cd -
 	sed -i "s/skynet_error(ctx, \"Set memory limit to %.2f M\"/\/\/skynet_error(ctx, \"Set memory limit to %.2f M\"/g" 3rd/skynet/service-src/service_snlua.c
 	sed -i "s/local errlist = {}/local errlist = {}\n\tname = string.gsub(name, \"%d\", \"\")/g" 3rd/skynet/lualib/snax/interface.lua
-	echo -e "lua_Number luai_numdiv(lua_State *L, lua_Number a, lua_Number b) { if(b != cast_num(0)) return (a)/(b); else luaG_runerror(L,\"division by zero\"); }" >> 3rd/skynet/3rd/lua/lvm.c
+	grep -q "luai_numdiv" 3rd/skynet/3rd/lua/lvm.c || printf "lua_Number luai_numdiv(lua_State *L, lua_Number a, lua_Number b) { if(b != cast_num(0)) return (a)/(b); else luaG_runerror(L,\"division by zero\"); }\n" >> 3rd/skynet/3rd/lua/lvm.c
 	sed -i "/#if !defined(luai_numdiv)/,+2d" 3rd/skynet/3rd/lua/llimits.h
 	sed -i "s/\/\* float division \*\//LUA_API lua_Number luai_numdiv(lua_State *L, lua_Number a, lua_Number b);/g" 3rd/skynet/3rd/lua/llimits.h
 	#open for time debug
