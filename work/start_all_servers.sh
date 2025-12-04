@@ -1,80 +1,78 @@
 #!/bin/bash
-# Start all game servers in correct order
-# Run from work directory
+
+# Quick Start Script for Mac
+# Starts all game servers in the correct order
 
 echo "=========================================="
-echo "Starting Game Server Cluster"
+echo "Starting Game Servers"
 echo "=========================================="
 echo ""
 
-# Check if we're in the right directory
+# Check if server is compiled
 if [ ! -f "co" ]; then
-    echo "❌ Error: Must run from work directory!"
-    echo "   cd work && ./start_all_servers.sh"
+    echo "ERROR: Server not compiled!"
+    echo "Please run 'make' first"
     exit 1
 fi
 
-# Make sure co is executable
-chmod +x co
+# Get Mac IP for display
+MAC_IP=$(ipconfig getifaddr $(route get default 2>/dev/null | awk '/interface/ { print $2 }' 2>/dev/null))
+if [ -z "$MAC_IP" ]; then
+    MAC_IP=$(ifconfig | grep "inet " | grep -v 127.0.0.1 | head -1 | awk '{print $2}')
+fi
 
-# Create logs directory
-mkdir -p logs
+echo "Server IP: $MAC_IP"
+echo ""
 
-echo "1/9 Starting Monitor Server (must be first)..."
+# Start servers in order
+echo "Starting Monitor Server..."
 bash etc/start_monitor.sh
 sleep 3
 
-echo "2/9 Starting DB Server..."
+echo "Starting Database Server..."
 bash etc/start_db.sh
-sleep 3
-
-echo "3/9 Starting Center Server..."
-bash etc/start_center.sh
-sleep 3
-
-echo "4/9 Starting Login Server..."
-bash etc/start_login.sh
-sleep 3
-
-echo "5/9 Starting Game Server (main server)..."
-bash etc/start_game.sh
-sleep 3
-
-echo "6/9 Starting Battle Server..."
-bash etc/start_battle.sh
-sleep 3
-
-echo "7/9 Starting Chat Server..."
-bash etc/start_chat.sh
-sleep 3
-
-echo "8/9 Starting Push Server..."
-bash etc/start_push.sh
-sleep 3
-
-echo "9/9 Starting Log Server..."
-bash etc/start_log.sh
 sleep 2
 
-echo ""
-echo "=========================================="
-echo "✅ All servers started!"
-echo "=========================================="
-echo ""
-echo "Check status:"
-echo "  cat ok.txt"
-echo ""
-echo "Monitor web interface:"
-echo "  http://localhost:58000"
-echo ""
-echo "Game server (for Unity client):"
-echo "  IP: $(hostname -I | awk '{print $1}')"
-echo "  Port: 44445"
-echo ""
-echo "View logs:"
-echo "  tail -f logs/*.log"
-echo ""
-echo "Check running processes:"
-echo "  ps aux | grep co | grep -v grep"
-echo ""
+echo "Starting Center Server..."
+bash etc/start_center.sh
+sleep 2
 
+echo "Starting Login Server..."
+bash etc/start_login.sh
+sleep 2
+
+echo "Starting Game Server..."
+bash etc/start_game.sh
+sleep 2
+
+echo "Starting Battle Server..."
+bash etc/start_battle.sh
+sleep 2
+
+echo "Starting Chat Server..."
+bash etc/start_chat.sh
+sleep 2
+
+echo "Starting Push Server..."
+bash etc/start_push.sh
+sleep 2
+
+echo "Starting Log Server..."
+bash etc/start_log.sh
+sleep 1
+
+echo ""
+echo "=========================================="
+echo "All Servers Started!"
+echo "=========================================="
+echo ""
+echo "Server Status:"
+ps aux | grep -E "./co etc/" | grep -v grep
+echo ""
+echo "Connection Info:"
+echo "  Game Server: $MAC_IP:44445"
+echo "  Monitor Web: http://$MAC_IP:58000"
+echo ""
+echo "Check status: cat ok.txt"
+echo "View logs: tail -f logs/game1.Error.*.log"
+echo ""
