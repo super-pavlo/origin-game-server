@@ -24,6 +24,11 @@ fi
 echo "Server IP: $MAC_IP"
 echo ""
 
+# Start Redis first (required by all servers)
+echo "Starting Redis (10 instances)..."
+bash etc/start_redis.sh
+sleep 2
+
 # Start servers in order
 echo "Starting Monitor Server..."
 bash etc/start_monitor.sh
