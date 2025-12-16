@@ -1,0 +1,490 @@
+/*
+* @file : ErrorCode.lua
+* @type : lualib
+* @author : linfeng
+* @created : Tue Nov 21 2017 13:56:04 GMT+0800 (中国标准时间)
+* @department : Arabic Studio
+* @brief : 错误枚举定义
+* Copyright(C) 2017 IGG, All rights reserved
+*/
+
+//-@class ErrorCodeClass
+public enum ErrorCode {
+    // 系统错误
+    SUCCESS                             =                   0,              // 成功
+    SERVER_DUMP                         =                   500,            // 系统异常
+    CFG_ERROR                           =                   600,            // 配置表错误
+    PROTOCOL_DELETE                     =                   601,            // 协议作废
+
+    // 角色相关错误
+    ROLE_CREATE_EXIST                   =                   1000,           // 角色已经存在,无法创建
+    ROLE_CREATE_FAIL                    =                   1001,           // 创建角色失败
+    ROLE_NOT_EXIST                      =                   1002,           // 角色不存在
+    ROLE_ARG_ERROR                      =                   1003,           // 角色模块参数错误
+    ROLE_HERO_NOT_EXIST                 =                   1004,           // 统帅不存在
+    ROLE_HERO_NOT_WAIT_STATUS           =                   1005,           // 统帅未处于待命状态
+    ROLE_HERO_STAR_NOT_ENOUGH           =                   1006,           // 统帅星级不足
+    ROLE_SOLDIER_NOT_ENOUGH             =                   1007,           // 士兵数量不足
+    ROLE_SOLDIER_TOO_MUCH               =                   1008,           // 选择的士兵数量超过部队容量
+    ROLE_TROOP_FULL                     =                   1009,           // 行军队列已满
+    ROLE_FOOD_NOT_ENOUGH                =                   1010,           // 粮食不足
+    ROLE_WOOD_NOT_ENOUGH                =                   1011,           // 木材不足
+    ROLE_STONE_NOT_ENOUGH               =                   1012,           // 石头不足
+    ROLE_GOLD_NOT_ENOUGH                =                   1013,           // 金币不足
+    ROLE_DENAR_NOT_ENOUGH               =                   1014,           // 钻石不足
+    ROLE_ARMY_LOCK                      =                   1015,           // 该兵种未解锁
+    ROLE_ARMY_BUILDING_UPDATE           =                   1016,           // 当前建筑正在升级
+    ROLE_ARMY_IN_TRAINING               =                   1017,           // 当前队列正在训练
+    ROLE_ARMY_TRAIN_NOT_END             =                   1018,           // 训练未结束无法领取
+    ROLE_RSS_CANT_BUY                   =                   1019,           // 该资源不能快捷购买
+    ROLE_ARMY_NOT_ENOUGH                =                   1020,           // 士兵数量不足
+    ROLE_HOSPITAL_NOT_ENOUGH            =                   1021,           // 医院容量不足
+    ROLE_TREATMENT_NOT_FINISH           =                   1022,           // 还未治疗完成
+    ROLE_TREATMENT_NOT_SOLDIER          =                   1023,           // 没有可领取的士兵
+    ROLE_ARMY_LEVEL_SAME                =                   1024,           // 无法晋升
+    ROLE_HOSPITAL_UPDATE                =                   1025,           // 所有医院都在升级
+    ROLE_RESOURCE_NOT_EXIST             =                   1026,           // 资源点不存在
+    ROLE_MONSTER_NOT_EXIST              =                   1027,           // 怪物不存在
+    ROLE_ACTION_NOT_ENOUGH              =                   1028,           // 角色行动力不足
+    ROLE_ALREADY_REINFORCE              =                   1029,           // 角色已增援此城堡
+    ROLE_REINFORCE_MAX                  =                   1030,           // 城堡增援超过上限
+    ROLE_ALREADY_RALLY                  =                   1031,           // 角色已参加此集结
+    ROLE_RALLY_MAX                      =                   1032,           // 集结超过上限
+    ROLE_MARCH_TARGET_NOT_EXIST         =                   1033,           // 军队行军目标不存在
+    ROLE_NOT_SELECT_SOLDIER             =                   1034,           // 角色未选择士兵
+    ROLE_SPEED_QUENE_FINISH             =                   1035,           // 加速队列已完成
+    ROLE_RESOURCE_NO_TECHNOLOGY         =                   1036,           // 采集资源所需科技未学习
+    ROLE_OTHER_COLLECT_RESOURCE         =                   1037,           // 其他人正在采集此资源点
+    ROLE_ARMY_TRAIN_FINISH              =                   1038,           // 训练已结束
+    ROLE_ARMY_TRAIN_NUM_ERROR           =                   1039,           // 训练数量错误
+    ROLE_NAME_NULL                      =                   1040,           // 修改名字为空
+    ROLE_NAME_LENGTH_ERROR              =                   1041,           // 名字长度不符合
+    ROLE_NAME_INVALID                   =                   1042,           // 名字不合法
+    ROLE_NAME_ONLY_NUM                  =                   1043,           // 不能使用纯数字作为角色名字
+    ROLE_NAME_SAME_OLD_NAME             =                   1044,           // 名字与当前名字重复，无需更改哦
+    ROLE_NAME_REPEAT                    =                   1045,           // 该名字已被占用
+    ROLE_NAME_ITEM_DENAR_NOT_ENOUGH     =                   1046,           // 道具和代币都不足
+    ROLE_BUFF_NOT_USE_ITEM              =                   1047,           // 该城市buff不能使用
+    ROLE_BUFF_ITEM_NOT_ENOUGH           =                   1048,           // buff道具不足
+    ROLE_BUFF_WAR                       =                   1049,           // 当前处于战争狂热，不能使用保护罩
+    ROLE_HEAD_NO_EXIST                  =                   1050,           // 头像不存在
+    ROLE_HEAD_FRAME_NO_EXIST            =                   1051,           // 头像框不存在
+    ROLE_VIP_AWARDED                    =                   1052,           // 今日VIP奖励已经领取
+    ROLE_AWARDED_MONUMENT               =                   1053,           // 已领取该纪念碑奖励
+    ROLE_CAN_NOT_MONUMENT_REWARD        =                   1054,           // 无法领取该纪念碑奖励
+    ROLE_EXPEDITIONCOIN_NOT_ENOUGH      =                   1055,           // 远征币不足
+    ROLE_COLLECT_CENTER_ONE_ARMY        =                   1056,           // 您只能派遣一支部队进入联盟资源中心
+    ROLE_COLLECT_CENTER_NOT_SELF_GUILD  =                   1057,           // 该资源中心不属于您所在的联盟，无法行军
+    ROLE_VIP_NOT_ENOUGH                 =                   1058,           // VIP等级不足
+    ROLE_CIVIL_IN_BATTLE                =                   1059,           // 当前城市处于战争状态，无法转换文明
+    ROLE_CIVIL_ARMY_IN_FIELD            =                   1060,           // 当前部队在野外，无法转换文明
+    ROLE_CIVIL_ARMY_QUEUE_NOT_FREE      =                   1061,           // 当前部队训练非空闲状态，无法转换文明
+    ROLE_CIVIL_HOSPITAL_NOT_FREE        =                   1062,           // 当前医院非空闲状态，无法转换文明
+    ROLE_BAN                            =                   1063,           // 账号已被封号
+    ROLE_ARMY_LOAD_FULL                 =                   1064,           // 角色部队负载已满
+    ROLE_DAILY_FREE_AWARDED             =                   1065,           // 已经领取过今日免费礼包
+    ROLE_SPEED_ITEM_NOT_ENOUGH          =                   1066,           // 加速道具不足
+    ROLE_IMMIGRATE_GAMENODE_NOT_FOUND   =                   1067,           // 角色移民失败
+    ROLE_MONSTER_CANT_SINGLE_ATTACK     =                   1068,           // 召唤怪物不能单人攻击
+    ROLE_CREATE_MAX                     =                   1069,           // 角色创建已满
+    ROLE_SWITCH_NOT_FOUND_NODE          =                   1070,           // 切换服务器节点不存在
+    ROLE_SWITCH_NOT_FOUND_ROLE          =                   1071,           // 切换服务器角色不存在
+
+    // 地图相关错误
+    MAP_MARCH_PATH_NOT_FOUND            =                   2000,           // 行军路线不存在
+    MAP_ARG_ERROR                       =                   2001,           // 地图模块参数错误
+    MAP_ARMY_NOT_EXIST                  =                   2002,           // 军队不存在
+    MAP_MAX_LEVEL_LIMIT                 =                   2003,           // 搜索野蛮人超出可刷新等级
+    MAP_NOT_FOUND_BARBARIAN             =                   2004,           // 未找到合适的野蛮人
+    MAP_MONSTER_NOT_EXIST               =                   2005,           // 怪物不存在
+    MAP_MARCH_ACTION_NOT_ENOUGH         =                   2006,           // 角色行军行动力不足
+    MAP_MONSTER_LEVEL_TOO_HIGH          =                   2007,           // 怪物等级太高
+    MAP_RESOURCE_NOT_EXIST              =                   2008,           // 采集对象不存在
+    MAP_COLLECT_THIS_RESOURCE           =                   2009,           // 角色正在采集该资源点
+    MAP_ARMY_FAILED_STATUS              =                   2010,           // 军队溃败中
+    MAP_MARCH_SAME_TARGET               =                   2011,           // 已经向该对象行军
+    MAP_ALREADY_STATION                 =                   2012,           // 军队已经在驻扎中
+    MAP_VILLAGE_ALREADY_SCOUT           =                   2013,           // 目标村庄已失效
+    MAP_VILLAGE_NOT_EXIST               =                   2014,           // 目标村庄不存在
+    MAP_NOT_VILLAGE                     =                   2015,           // 目标不是村庄
+    MAP_CITY_DETAIL_SELF                =                   2016,           // 无法获取自己的地图内城建筑信息
+    MAP_CAVE_ALREADY_SCOUT              =                   2017,           // 山洞已探索
+    MAP_ATTACK_CITY_LEVEL_ERROR         =                   2018,           // 进攻城堡等级不足
+    MAP_ATTACK_SHILED                   =                   2019,           // 目标处于护盾中无法攻击
+    MAP_ATTACK_GUILD_MEMBER             =                   2020,           // 无法攻击同盟玩家
+    MAP_REINFORCE_NOT_SELF_GUILD        =                   2021,           // 增援的不是自己联盟的建筑
+    MAP_ALREADY_REINFORCE_GUILD         =                   2022,           // 只能派遣1支部队建造联盟建筑
+    MAP_GUILD_BUILD_ARMY_LIMIT          =                   2023,           // 超过集结部队容量限制
+    MAP_MOVE_CITY_MARCH_BATTLE          =                   2024,           // 执政官，您有部队正在行军或战斗中，无法进行迁城
+    MAP_MOVE_CITY_STATION               =                   2025,           // 执政官，您有部队正在野外扎营中，暂时无法进行迁城
+    MAP_MOVE_CITY_REINFORCE             =                   2026,           // 执政官，在部队集结过程中无法进行迁城
+    MAP_MOVE_CITY_COLLECT               =                   2027,           // 您有部队正在野外进行采集，暂时无法进行迁城。
+    MAP_MOVE_CITY_DENSEFOG              =                   2028,           // 无法迁城至迷雾地区
+    MAP_MOVE_CITY_NOVICE_ITEM           =                   2029,           // 当前不满足新手迁城条件
+    MAP_MOVE_CITY_ITEM_NOT_ENOUGH       =                   2030,           // 迁城道具不足
+    MAP_MOVE_CITY_NO_GUILD_TERRITORY    =                   2031,           // 目标点是其他的联盟领土
+    MAP_RESOURCE_NO_ARMY                =                   2032,           // 资源点内无部队
+    MAP_MONSTER_CITY_ONLY_RALLY         =                   2033,           // 野蛮人城寨只能集结攻击
+    MAP_CANNOT_RALLY_HOLY_LAND          =                   2034,           // 圣地守护者无法被集结
+    MAP_CANNOT_ATTACK_SELF              =                   2035,           // 无法攻击自己或者自己的盟友
+    MAP_MOVE_CITY_HOLYLAND_TERRITORY    =                   2036,           // 检测目标位置是否在关卡/圣地所属特殊领土内
+    MAP_RALLY_CANNOT_MOVE               =                   2037,           // 集结部队无法自由行军
+    MAP_INVALID_ATTACK_TARGET           =                   2038,           // 无效的攻击对象
+    MAP_MOVE_CITY_TERRITORY_SPACE       =                   2039,           // 不能使用领土迁城到空地中
+    MAP_MOVE_CITY_CANT_ARRIVE           =                   2040,           // 定点迁城目标点不可到达
+    MAP_OPERATE_RALLY_ARMY              =                   2041,           // 集结驻防的部队无法操作
+    MAP_MOVE_CITY_BUILD_INVALID         =                   2042,           // 定点迁城目标点不可放置建筑
+    MAP_MOVE_CITY_RALLY_ARMY            =                   2043,           // 部队集结中无法迁城
+    MAP_OBJECT_CANT_COLLECT             =                   2044,           // 目标对象不可采集
+    MAP_RESOURCE_ATTACK_NOT_ARMY        =                   2045,           // 资源田中无部队不能攻击
+    MAP_MOVE_CITY_SCOUTS_ERROR          =                   2046,           // 请先召回斥候再进行迁城
+    MAP_STATION_OBSTRACLE               =                   2047,           // 阻挡区域无法驻扎
+    MAP_ATTACK_FAIL_ARMY                =                   2048,           // 无法攻击溃败的部队
+    MAP_PERSON_MARKER_LIMIT             =                   2049,           // 书签数量已超过上限
+    MAP_DESCRIPTION_LENGTH_LIMIT        =                   2050,           // 书签描述字符数超长
+    MAP_ROLE_MARKER_NOT_EXIST           =                   2051,           // 角色个人书签不存在
+    MAP_MULTI_ARMY_SAME_TARGET          =                   2052,           // 多支部队无法同时朝同一目标行军
+
+    // 统帅模块相关错误
+    HERO_OPEN_DAYS_NOT_ENOUGH           =                   3000,           // 召唤统帅，所在王国不满足该统帅解锁天数条件
+    HERO_SUMMON_ITEM_NOT_ENOUGH         =                   3001,           // 召唤统帅所需道具不足
+    HERO_ALREADY_EXIST                  =                   3002,           // 统帅已存在
+    HERO_NOT_EXIST                      =                   3003,           // 统帅不存在
+    HERO_SKILL_MAX                      =                   3004,           // 统帅技能最大，无法升级
+    HERO_LEVEL_ITEM_NOT_ENOUGH          =                   3005,           // 升级技能道具不足
+    HERO_NOT_AWAKE                      =                   3006,           // 该统帅无法觉醒
+    HERO_SKILL_NOT_MAX                  =                   3007,           // 统帅技能未满，无法觉醒
+    HERO_NOT_EXCHANGE                   =                   3008,           // 该统帅无法使用通用雕像兑换
+    HERO_EXCHANGE_SKILL_MAX             =                   3009,           // 统帅技能已满，无法兑换
+    HERO_EXCHANGE_ITEM_NOT_ENOUGH       =                   3010,           // 通用雕像不足
+    HERO_LEVEL_LIMIT                    =                   3011,           // 统帅等级达到上限，无法升级
+    HERO_STAR_MAX                       =                   3012,           // 统帅达到最大星级，无法升星
+    HERO_LEVEL_NO_ENOUGH                =                   3013,           // 统帅等级不足，无法升星
+    HERO_NO_ITEM                        =                   3014,           // 升星材料不足
+    HERO_ITEM_ERROR                     =                   3015,           // 升星材料类型错误
+    HERO_ITEM_TO_MUCH                   =                   3016,           // 道具不足无法升星
+    HERO_TALENT_POINT_NOT_ENOUGH        =                   3017,           // 统帅天赋点不足
+    HERO_CAN_NOT_STUDY_TALENT           =                   3018,           // 统帅无法学习该天赋
+    HERO_TALENT_PRE_NOT_STUDY           =                   3019,           // 天赋前置未学习
+    HERO_STUDY_SAME_LEVEL_TALENT        =                   3020,           // 已学习该级天赋
+    HERO_TALENT_INDEX_ERROR             =                   3021,           // 天赋分页错误
+    HERO_TALENT_INDEX_SAME              =                   3022,           // 天赋分页相同
+    HERO_TALENT_NAME_LENGTH_ERROR       =                   3023,           // 天赋页名称长度错误
+    HERO_EQUIP_LV_NO_ENOUGH             =                   3024,           // 英雄等级不足
+    HERO_EQUIP_SUBTYPE_ERROR            =                   3025,           // 穿戴类型错误
+    HERO_EQUIP_NOT_IN_CITY              =                   3026,           // 英雄不再城内
+    HERO_EQUIP_ALREADY_WEAR             =                   3027,           // 该装备已经被装备
+
+    // 任务模块相关错误
+    TASK_ARG_ERROR                      =                   4000,           // 任务模块参数错误
+    TASK_ALREADY_HAVE_CHAPTER           =                   4001,           // 角色已领取章节
+    TASK_FINISH_ALL_CHAPTER             =                   4002,           // 角色已完成所有章节
+    TASK_NOT_HAVE_CHAPTER               =                   4003,           // 角色未领取章节
+    TASK_CHAPTER_NOT_TASK               =                   4004,           // 章节中无此任务
+    TASK_ALREADY_FINISH_CHAPTER_TASK    =                   4005,           // 角色已完成此章节任务
+    TASK_NOT_FINISH_ALL_CHAPTER_TASK    =                   4006,           // 角色未完成所有章节任务
+    TASK_CHAPTER_TASK_NOT_FINISH        =                   4007,           // 章节任务未完成
+    TASK_NOT_ACCEPT_MAINLINE            =                   4008,           // 角色未领取该主线任务
+    TASK_NOT_FINISH                     =                   4009,           // 任务完成条件不满足
+    TASK_SIDE_FINISHED                  =                   4010,           // 该支线任务已完成
+    TASK_NOT_EXIST                      =                   4011,           // 任务不存在
+    TASK_ACTIVE_POINT_NOT_ENOUGH        =                   4012,           // 活跃度不足
+
+    // 科技模块相关错误
+    TECHNOLOGY_COLLAGE_NOT_BUILD        =                   5000,           // 学院未建造
+    TECHNOLOGY_COLLAGE_UPDATE           =                   5001,           // 学院正在升级
+    TECHNOLOGY_RESEARCHING              =                   5002,           // 正在研究
+    TECHNOLOGY_PRE_LOCK                 =                   5003,           // 前置科技未解锁
+    TECHNOLOGY_CAMPUS_LV_NOT_ENOUGH     =                   5004,           // 学院等级不足
+    TECHNOLOGY_NOT_AWARD                =                   5005,           // 科技还未领取
+    TECHNOLOGY_NOT_RESEARCH             =                   5006,           // 没有在研究的科技
+    TECHNOLOGY_CONFIG_NOT_FIND          =                   5007,           // 科技配置不存在
+    TECHNOLOGY_IMMEDIATELY_ERROR        =                   5008,           // 科技升级中，无法立即完成
+
+    // 建筑模块相关错误
+    BUILDING_LOCK                       =                   6000,           // 建筑未解锁
+    BUILDING_AREA_ERROR                 =                   6001,           // 建筑区域错误
+    BUILDING_COUNT_MAX                  =                   6002,           // 建筑数量超出限制
+    BUILDING_NOT_FREE_QUEUE             =                   6003,           // 没有空闲的建筑队列
+    BUILDING_LEVEL_MAX                  =                   6004,           // 建筑已满级
+    BUILDING_TRIAN                      =                   6005,           // 建筑正在训练中，无法升级
+    BUILDING_RESREACH                   =                   6006,           // 建筑正在研究中，无法升级
+    BUILDING_TREATMENT                  =                   6007,           // 建筑正在治疗中，无法升级
+    BUILDING_CREATEING                  =                   6008,           // 建筑还未创建完成，无法收取资源
+    BUILDING_NOT_EXIST                  =                   6009,           // 建筑不存在
+    BUILDING_IMMEDIATELY_ERROR          =                   6010,           // 建筑升级中，不能立即完成
+    BUILDING_DISMANTLE_ERROR            =                   6011,           // 建筑拆除类型错误
+    BUILDING_INDEX_ERROR                =                   6012,           // 领取资源索引为空
+    BUILD_SILVER_FREE_NOT_ENOHGH        =                   6013,           // 开启银宝箱免费次数不足
+    BUILD_SILVER_FREE_TIME_ERROR        =                   6014,           // 开启银宝箱时间未到
+    BUILD_GOLD_FREE_NOT_ENOHGH          =                   6015,           // 开启金宝箱免费次数不足
+    BUILDING_WALL_NOT_FIRE              =                   6016,           // 城墙不在燃烧状态
+    BUILDING_WALL_HP_FULL               =                   6017,           // 城墙耐久值满
+    BUILDING_WALL_SERVICE_TIME_ERROR    =                   6018,           // 未达到维修时间
+    BUILDING_WALL_HERO_SAME             =                   6019,           // 驻防主副统帅相同
+    BUILDING_QUEUE_MAX                  =                   6020,           // 建筑队列已满
+    BUILDING_ITEM_ERROR                 =                   6021,           // 解锁建筑道具类型错误
+    BUILDING_SMITHY_NO_EXIST            =                   6022,           // 铁匠铺不存在
+    BUILDING_SMITHY_QUEUE_MAX           =                   6023,           // 材料队列已满
+    BUILDING_SMITHY_ITEM_ERROR          =                   6024,           // 无法生产该道具
+    BUILDING_SMITHY_CAN_NOT_AWARD       =                   6025,           // 无法领取材料
+    BUILDING_SMITHY_CAN_NOT_SYNTHESIS   =                   6026,           // 该材料无法合成
+    BUILDING_SMITHY_ITEM_NOT_ENOUGH     =                   6027,           // 该材料不足
+    BUILDING_SMITHY_NOT_DECOMPOSITION   =                   6028,           // 该材料无法分解
+    BUILDING_EQUIP_NO_EXIST             =                   6029,           // 装备不存在
+    BUILDING_EQUIP_ITEM_NO_ENOUGH       =                   6030,           // 装备道具不足
+    BUILDING_EQUIP_EXCLUSIVE_ERROR      =                   6031,           // 打造装备触发专属错误
+    BUILDING_LEVEL_UP                   =                   6032,           // 该建筑已经在升级中
+    BUILD_SMITHY_CAN_NOT_AWARD          =                   6033,           // 材料不可以领取
+
+    // 邮件模块相关错误
+    EMAIL_ARG_ERROR                     =                   7000,           // 邮件模块参数错误
+    EMAIL_NOT_EXIST                     =                   7001,           // 邮件不存在
+    EMAIL_NOT_ENCLOSURE                 =                   7002,           // 邮件无附件奖励
+    EMAIL_ALREADY_TAKE_ENCLOSURE        =                   7003,           // 已领取该邮件附件奖励
+    EMAIL_ALREADY_READ                  =                   7004,           // 邮件已读
+    EMAIL_ALREADY_REQUEST               =                   7005,           // 已请求过邮件信息
+    EMAIL_NOT_TAKE_ENCLOSURE            =                   7006,           // 未领取附件的邮件不能收藏
+    EMAIL_NO_GUILD_JURISDICTION         =                   7007,           // 无发送联盟邮件的权限
+    EMAIL_SUBTITLE_LEN_LIMIT            =                   7008,           // 副标题超长
+    EMAIL_CONTENT_LEN_LIMIT             =                   7009,           // 内容超长
+    EMAIL_SUBTITLE_INVALID              =                   7010,           // 副标题存在非法字符
+    EMAIL_CONTENT_INVALID               =                   7011,           // 内容存在非法字符
+    EMAIL_REWARD_NOT_AWARD              =                   7012,           // 邮件附件未领取，无法删除
+    EMAIL_SEND_TOO_OFTEN                =                   7013,           // 邮件发送过于频繁
+    EMAIL_GUILD_TIMES_LIMIT             =                   7014,           // 联盟邮件发送次数限制
+
+    // 道具模块相关错误
+    ITEM_NOT_ENOUGH                     =                   8000,           // 道具不足
+    ITEM_ARG_ERROR                      =                   8001,           // 道具模块参数错误
+    ITEM_NOT_EXIST                      =                   8002,           // 道具不存在
+    ITEM_NOT_RESOURCE_ITEM              =                   8003,           // 不是资源类型道具
+    ITEM_NOT_BATCH_USE                  =                   8004,           // 道具不支持批量使用
+    ITEM_NOT_USE                        =                   8005,           // 道具无法使用
+    ITEM_PACKAGEID_NOT_EXIST            =                   8006,           // 所选道具礼包组不存在
+    ITEM_KINGDOM_MAP_NO_POS             =                   8007,           // 使用王国地图未上传坐标
+    ITEM_NOT_JOIN_GUILD                 =                   8008,           // 您尚未加入任何联盟
+    ITEM_SOMMON_MONSTER_FAILED          =                   8009,           // 城市周围召唤的乱军或中立单位太多，无法继续召唤
+
+    // 斥候模块相关错误
+    SCOUTS_NOT_FOUND                    =                   9000,           // 斥候不存在
+    SCOUTS_NOT_STANBY                   =                   9001,           // 斥候不处于待命状态
+    SCOUTS_NOT_POS_DENSEFOG             =                   9002,           // 目的地范围内没有未开启的迷雾
+    SCOUTS_NOT_SCOUTS_TYPE              =                   9003,           // 对象不是斥候
+    SCOUTS_TARGET_NOT_EXIST             =                   9004,           // 侦查探索的目标不存在
+    SCOUTS_NOT_SUPPORT_SCOUT_TYPE       =                   9005,           // 目标类型不支持侦查
+    SCOUTS_TARGET_LEVEL_TOO_HIGH        =                   9006,           // 敌方的市政厅等级高于我方10级以上，无法进行侦察
+    SCOUTS_RESOURCE_NOT_ARMY            =                   9007,           // 资源点内无部队，无法侦查
+    SCOUTS_CURRENCY_NOT_ENOUGH          =                   9008,           // 侦查所需货币不足
+    SCOUTS_HOLYLAND_CANT_SCOUT          =                   9009,           // 当前圣地状态不能侦查
+    SCOUTS_SAME_GUILDID                 =                   9010,           // 侦查对象为本盟的
+    SCOUTS_CITY_SHIELD                  =                   9011,           // 目标城市处于保护状态
+    SCOUTS_SCOUTSING_BUSY               =                   9012,           // 斥候侦查忙碌状态
+
+    // 商城相关模块错误
+    SHOP_ITEM_NOT_SELL                  =                   10000,          // 商品没有在商店中售卖
+    SHOP_POST_ITEM_NOT_EXIST            =                   10001,          // 驿站道具不存在
+    SHOP_POST_ITEM_HAVE_BUY             =                   10002,          // 驿站道具已购买过
+    SHOP_POST_NOT_EXIST                 =                   10003,          // 神秘商店不存在
+    SHOP_POST_REFRESH_COUNT_LIMIT       =                   10004,          // 神秘商店刷新次数到达上限
+    SHOP_VIP_LEVEL_NOT_ENOUGH           =                   10005,          // vip不足
+    SHOP_VIP_NUM_MAX                    =                   10006,          // 购买数量超过上限
+    SHOP_EXPEDITION_ITEM_COUNT_MAX      =                   10007,          // 远征商店购买数量超过上限
+    SHOP_EXPEDITION_REFRESH_COUNT_MAX   =                   10008,          // 远征商店刷新次数到达上限
+
+    // 聊天模块错误
+    CHAT_ARG_ERROR                      =                   11001,          // 聊天参数错误
+    CHAT_LEVEL_LESS                     =                   11002,          // 聊天等级不足
+    CHAT_NOT_IN_GUILD                   =                   11003,          // 聊天不在联盟中
+    CHAT_INVALID_TYPE                   =                   11004,          // 聊天频道类型错误
+    CHAT_TOO_OFTEN                      =                   11005,          // 聊天过于频繁
+    CHAT_COST_NOT_ENOUGH                =                   11006,          // 聊天消耗不足
+    CHAT_WORD_LIMIT                     =                   11007,          // 聊天字符过长
+    CHAT_TARGET_LEVEL_LESS              =                   11008,          // 聊天对象等级不足
+    CHAT_SILENCE                        =                   11009,          // 聊天禁言中
+	CHAT_HOUR_SEND_LMT					=					11010,			// 每小时发送邮件限制
+
+    // 联盟相关模块错误
+    GUILD_ARG_ERROR                     =                   12000,          // 联盟模块参数错误
+    GUILD_ABBNAME_LENGTH_ERROR          =                   12001,          // 联盟简称长度错误
+    GUILD_ABBNAME_CHAR_ERROR            =                   12002,          // 联盟简称包含其他字符
+    GUILD_ABBNAME_REPEAT                =                   12003,          // 该简称已被使用
+    GUILD_ABBNAME_INVALID               =                   12004,          // 简称包含敏感字符
+    GUILD_NAME_LENGTH_ERROR             =                   12005,          // 联盟名称长度错误
+    GUILD_NAME_INVALID                  =                   12006,          // 名称包含敏感字符
+    GUILD_NOTICE_LENGTH_ERROR           =                   12007,          // 公告长度超出限制
+    GUILD_NOTICE_INVALID                =                   12008,          // 公告包含敏感字符
+    GUILD_ALREADY_IN_GUILD              =                   12009,          // 角色已在联盟中
+    GUILD_NOT_EXIST                     =                   12010,          // 联盟不存在
+    GUILD_MEMBER_FULL                   =                   12011,          // 联盟成员已满
+    GUILD_APPLY_FULL                    =                   12012,          // 当前联盟太多人申请了
+    GUILD_NOT_IN_GUILD                  =                   12013,          // 角色不在联盟中
+    GUILD_APPLYRID_NOT_EXIST            =                   12014,          // 无此申请入盟角色
+    GUILD_APPLYRID_OTHER_GUILD          =                   12015,          // 当前玩家已经加入其他联盟
+    GUILD_NAME_REPEAT                   =                   12016,          // 该名称已被使用
+    GUILD_CREATE_FAILED                 =                   12017,          // 联盟创建失败
+    GUILD_NO_JURISDICTION               =                   12018,          // 角色没有权限
+    GUILD_MEMBER_NOT_IN_GUILD           =                   12019,          // 该成员不在联盟中
+    GUILD_MEMBER_LEVEL_ERROR            =                   12020,          // 您无法将他/她升至与您相同或超过您的成员等级
+    GUILD_JOB_NUM_LIMIT                 =                   12021,          // 当前等级成员人数已满
+    GUILD_CANT_KICK_LEVEL_MEMBER        =                   12022,          // 不能移除该等级成员
+    GUILD_APPOINT_CDTIME_LIMIT          =                   12023,          // 官员任命冷却时间未到
+    GUILD_MEMBER_NOT_R4_APPOINTED       =                   12024,          // 该成员不是R4,不能任命为官员
+    GUILD_HELP_QUEUE_NOT_EXIST          =                   12025,          // 联盟求助的队列不存在
+    GUILD_ALREADY_SEND_GUILD_HELP       =                   12026,          // 已发送过该类型联盟求助
+    GUILD_BUILD_NOT_EXIST               =                   12027,          // 联盟建筑不存在
+    GUILD_CANT_REMOVE_OTHER_GUILD       =                   12028,          // 不能拆除其他联盟的建筑
+    GUILD_CANT_REPAIR_OTHER_GUILD       =                   12029,          // 不能维修其他联盟的建筑
+    GUILD_REPAIR_CDTIME_LIMIT           =                   12030,          // 灭火冷却时间还未过
+    GUILD_BUILD_NOT_BURNING             =                   12031,          // 联盟建筑非燃烧状态
+    GUILD_POINT_NOT_ENOUGH              =                   12032,          // 联盟积分不足
+    GUILD_BUILD_NOT_OPEN_SPACE          =                   12033,          // 您只能在开阔的空地上进行此操作，请确保目的地周围没有其他物体
+    GUILD_WELCOME_EMAIL_INVALID         =                   12034,          // 设置欢迎邮件内容无效
+    GUILD_ABBNAME_NOT_MODIFY            =                   12035,          // 联盟简称未修改
+    GUILD_NAME_NOT_MODIFY               =                   12036,          // 联盟名称未修改
+    GUILD_SIGN_NOT_MODIFY               =                   12037,          // 联盟标识未修改
+    GUILD_BUILD_NUM_LIMIT               =                   12038,          // 联盟建筑数量已经达到上限
+    GUILD_PRE_BUILD_NOT_ENOUGH          =                   12039,          // 前置联盟建筑不满足
+    GUILD_POWER_PLAY_NOT_ENOUGH         =                   12040,          // 联盟人数或战力不足
+    GUILD_BUILD_CREATE_IN_DENSEFOG      =                   12041,          // 联盟建筑无法修建在迷雾之中
+    GUILD_BUILD_CANT_OTHER_GUILD        =                   12042,          // 执政官，您的领土无法与其他联盟的领土重叠
+    GUILD_TERRITORY_ALREADY_BUILD       =                   12043,          // 联盟建筑间的距离太近了，请远离一点建造
+    GUILD_CURRENCY_NOT_ENOUGH           =                   12044,          // 当前联盟资源不足，请在联盟获取足够的资源后再次尝试
+    GUILD_TERRITORY_GAIN_LEVEL_ERROR    =                   12045,          // 角色市政厅等级未达到领取领土收益的要求
+    GUILD_CREATE_BUILD_LEVEL_ERROR      =                   12046,          // 市政厅等级低于{0}级的执政官无法参与联盟资源中心的建造和采集
+    GUILD_ALREADY_HAVE_RESOURCE_CENTER  =                   12047,          // 已经有联盟资源中心存在
+    GUILD_RESOURCE_NOT_TERRITORY        =                   12048,          // 资源中心必须被建造在联盟领土之上
+    GUILD_CREATE_BUILD_CANT_ARRIVE      =                   12049,          // 前往目的地的道路受到了阻碍，请先占领沿途的关卡！
+    GUILD_CREATE_FLAG_NOT_LINK          =                   12050,          // 执政官，您只能在与您的联盟领土相连接才能修建联盟旗帜
+    GUILD_BUILD_CREATE_IN_HOLYLAND      =                   12051,          // 目标位置在关卡/圣地所属特殊领土内
+    GUILD_TECHNOLOGY_DONATE_NO_TIMES    =                   12052,          // 角色没有捐献次数
+    GUILD_DONATE_FOOD_NOT_ENOUGH        =                   12053,          // 角色科技捐献粮食不足
+    GUILD_DONATE_WOOD_NOT_ENOUGH        =                   12054,          // 角色科技捐献木材不足
+    GUILD_DONATE_STONE_NOT_ENOUGH       =                   12055,          // 角色科技捐献石料不足
+    GUILD_DONATE_GOLD_NOT_ENOUGH        =                   12056,          // 角色科技捐献金币不足
+    GUILD_DONATE_DENAR_NOT_ENOUGH       =                   12057,          // 角色科技捐献代币不足
+    GUILD_JOIN_TIME_NOT_ENOUGH          =                   12058,          // 加入联盟24小时后才能使用宝石进行捐献
+    GUILD_DONATE_PRE_NOT_FINISH         =                   12059,          // 捐献科技前置科技未达到条件
+    GUILD_NO_RECOMMEND_TECHNOLOGY       =                   12060,          // 执政官，您的联盟权限不足
+    GUILD_NO_RESEARCH_TECHNOLOGY        =                   12061,          // 只有盟主和官员才能进行研究
+    GUILD_RESEARCH_OTHER_TECHNOLOGY     =                   12062,          // 其他联盟科技正在研究中
+    GUILD_RESEARCH_RESOURCE_NOT_ENOUGH  =                   12063,          // 当前联盟资源不足，请在联盟获取足够的资源后再次尝试
+    GUILD_MESSAGE_BOARD_LENGTH_LIMIT    =                   12064,          // 留言板长度限制
+    GUILD_MESSAGE_BOARD_INVALID         =                   12065,          // 内容包含敏感字符
+    GUILD_REPLY_MESSAGE_INVALID         =                   12066,          // 您所回复的留言已失效
+    GUILD_REPLY_SUM_LIMIT               =                   12067,          // 您的留言太快了，请先等待他人回复或删除部分留言
+    GUILD_SELF_REPLY_SUM_LIMIT          =                   12068,          // 该留言的回复过多，无法继续回复
+    GUILD_SEND_MESSAGE_FAILED           =                   12069,          // 发布消息失败
+    GUILD_DELETE_MESSAGE_FAILED         =                   12070,          // 删除消息失败
+    GUILD_NO_OPEN_MESSAGE_BOARD         =                   12071,          // 留言板功能未打开
+    GUILD_INDIVIDUAL_POINT				=					12072,			// 联盟个人积分不足
+    GUILD_SHOP_ITEM_NOT_EXIST			=					12073,			// 联盟商店商品不存在
+    GUILD_SHOP_ITEM_NOT_ENOUGH			=					12074,			// 联盟商店商品数量不足
+    GUILD_INVITE_EMAIL_REPLY            =                   12075,          // 联盟邀请邮件已回复
+    GUILD_ALREADY_IN_OTHER_GUILD        =                   12076,          // 角色已经加入其它联盟中
+    GUILD_ROLE_ALREADY_INVITED          =                   12077,          // 已向该角色发送过联盟邀请
+    GUILD_INVITE_LIMIT                  =                   12078,          // 联盟邀请已到上限
+    GUILD_ALREADY_DISBAND               =                   12079,          // 当前联盟已经解散
+    GUILD_IN_THIS_GUILD                 =                   12080,          // 已经在当前联盟中
+    GUILD_BUILD_ARMY_MARCH_ERROR        =                   12081,          // 部队已向该联盟建筑行军
+    GUILD_CENTER_ALREADY_ARMY_COLLECT   =                   12082,          // 联盟资源中心已有部队采集
+    GUILD_HOLY_LAND_ARMY_MARCH_ERROR    =                   12083,          // 部队已向该圣地行军
+    GUILD_WELCOM_EMAIL_LEN_LIMIT        =                   12084,          // 设置的欢迎邮件超长
+    GUILD_TRANSFER_MEMBER_HIDE          =                   12085,          // 移交盟友的城市已被回收
+
+    // 活动相关模块错误
+    ACTIVITY_CITY_LEVEL_ERROR           =                   13000,          // 活动数据错误
+    ACTIVITY_CAN_NOT_AWARD              =                   13001,          // 未达到领取条件
+    ACTIVITY_TIME_OUT                   =                   13002,          // 活动时间未开启
+    ACTIVITY_AWARDED                    =                   13003,          // 已经领取过该奖励
+    ACTIVITY_DAY_ERROR                  =                   13004,          // 领取奖励天数错误
+    ACTIVITY_EXCHANGE_TIME_MAX          =                   13005,          // 已达到领取上限
+    ACTIVITY_TYPE_ERROR                 =                   13006,          // 活动类型错误
+    ACTIVITY_LEVEL_NOT_ENOUGH           =                   13007,          // 市政厅等级不足
+    ACTIVITY_DAY_COUNT_MAX              =                   13008,          // 每日次数达到上限
+    ACTIVITY_FREE_COUNT_MAX             =                   13009,          // 免费次数达到上限
+    ACTIVITY_TURN_COUNT_NOT_ENOUGH      =                   13010,          // 无法领取转盘累计奖励
+    ACTIVITY_DISCOUNT_COUNT_MAX         =                   13011,          // 折扣次数达到上限
+
+    // 充值相关
+    RECHARGE_RISE_AWARD                 =                   14000,          // 崛起之路已经领取了
+    RECHARGE_RISE_CAN_NOT_AWARD         =                   14001,          // 崛起之路累计钻石不足
+    RECHARGE_RISE_FRONT_NOT_AWARD       =                   14002,          // 崛起之路前置奖励未领取
+    RECHARGE_FUND_NOT_BUY               =                   14003,          // 成长基金还未购买
+    RECHARGE_FUND_CONDITION_NOT_ENOUGH  =                   14004,          // 成长基金领奖条件不足
+    RECHARGE_FUND_AWARDED               =                   14005,          // 成长基金已经领取过了
+    RECHARGE_SUPPLY_AWARDED             =                   14006,          // 今日城市补给站已经领取过了
+    RECHARGE_SUPPLY_NOT_BUY             =                   14007,          // 城市补给站未购买
+
+    // 集结相关
+    RALLY_ARG_ERROR                     =                   15000,          // 集结模块参数错误
+    RALLY_ROLE_MAX_LAUNCH               =                   15001,          // 角色只能同时发起一个集结
+    RALLY_ROLE_NO_GUILD                 =                   15002,          // 角色未加入联盟,无法发起集结
+    RALLY_ROLE_LEVEL_LESS               =                   15003,          // 角色市政厅等级不足,无法发起集结
+    RALLY_NO_CASTLE_BUILD               =                   15004,          // 角色无城堡建筑,无法发起集结
+    RALLY_GUILD_HAD_RALLY               =                   15005,          // 联盟已对目标发起了集结
+    RALLY_TARGET_LEVEL_LESS             =                   15006,          // 目标城市等级过低,无法集结
+    RALLY_NO_PATH_TO_TARGET             =                   15007,          // 无路径到目标点,无法集结
+    RALLY_ACTION_FORCE_NO_ENOUGH        =                   15008,          // 集结行动力不足
+    RALLY_TARGET_IN_SHIELD              =                   15009,          // 目标处于护盾内
+    RALLY_TARGET_NOT_BORDER             =                   15010,          // 目标未与联盟领地接壤
+    RALLY_INVALID_READY_TIME            =                   15011,          // 无效的集结时间
+    RALLY_OVER_MAX_MASS_TROOPS          =                   15012,          // 超过最大集结容量
+    RALLY_JOIN_NO_GUILD                 =                   15013,          // 加入集结失败,不在联盟中
+    RALLY_JOIN_NOT_SAME_GUILD           =                   15014,          // 加入集结失败,不处于同一联盟中
+    RALLY_ARMY_CANNOT_JOIN              =                   15015,          // 部队无法加入集结
+    RALLY_JOIN_NOT_FOUND                =                   15016,          // 目标未发起集结,无法加入
+    RALLY_JOIN_HAD_JOIN                 =                   15017,          // 已经加入了集结,无法加入
+    RALLY_PATH_NOT_FOUND                =                   15018,          // 加入集结失败,未找到路径
+    RALLY_CREATE_ARMY_FAIL              =                   15019,          // 集结创建部队失败
+    RALLY_JOIN_SELF                     =                   15020,          // 无法加入自己的集结
+    RALLY_REPARTRIATION_SELF            =                   15021,          // 无法遣返自己的部队
+    RALLY_REPARTRIATION_NOT_LEADER      =                   15022,          // 非集结队长,无法遣返部队
+    RALLY_REPARTRIATION_NOT_IN_TEAM     =                   15023,          // 不在集结队伍中,无法遣返
+    RALLY_REPARTRIATION_TEAM_LEAVE      =                   15024,          // 集结队伍已出发,无法遣返
+    RALLY_DISBAND_NOT_RALLY             =                   15025,          // 集结队伍不存在,无法解散
+    RALLY_REINFORCE_NOT_RALLY_ARMY      =                   15026,          // 增援的不是集结部队
+    RALLY_REINFORCE_TARGET_NO_EXIST     =                   15027,          // 增援的目标不存在
+    RALLY_HAD_REINFORCE                 =                   15028,          // 已经进行了增援,无法继续增援
+    RALLY_ALLIANCE_CENTER_ARMY_LIMIT    =                   15029,          // 超过联盟中心援助上限
+    RALLY_TARGET_NOT_FOUND              =                   15030,          // 集结目标不存在
+    RALLY_REINFORCE_FAIL                =                   15031,          // 增援目标失败
+    RALLY_INVALID_TARGET                =                   15032,          // 无效的集结目标
+    RALLY_JOIN_ON_ARMY_MATCH            =                   15033,          // 集结部队已经出发,无法再加入集结
+    RALLY_HAD_REINFORCE_TARGET          =                   15034,          // 已经增援了此目标,无法增援
+    RALLY_HAD_JOIN_TARGET_REINFORCE     =                   15035,          // 已经加入了此目标,无法增援
+    RALLY_REINFORCE_CITY_FAIL           =                   15036,          // 增援城市失败
+    RALLY_REPATRIATION_REINFORCE_FAIL   =                   15037,          // 遣返失败
+    RALLY_HOLYLAND_PROTECT_STATUS       =                   15038,          // 圣地或关卡处于未开放或保护状态
+    RALLY_NOT_SAME_GUILD                =                   15039,          // 和目标不处于同一联盟
+    RALLY_NOT_GUILD_HOLY_LAND           =                   15040,          // 增援的不是自己联盟的圣地关卡
+    RALLY_REINFORCE_CITY_FAIL_ARMY_FULL =                   15041,          // 增援城市失败,目标容量已满
+    RALLY_HOLY_LAND_SOLDIER_LIMIT       =                   15042,          // 部队数量超过关卡圣地的容量限制
+    RALLY_REINFORCE_CITY_HAD_REINFORCE  =                   15043,          // 增援城市失败,已有部队增援
+    RALLY_SAME_GUILD                    =                   15044,          // 无法集结同联盟目标
+    RALLY_NOT_ALLIANCE_CENTER           =                   15045,          // 目标没有联盟中心,无法增援
+    RALLY_CANT_MULTI_REINFORCE_ARMY     =                   15046,          // 您只能派出一支部队加入集结部队
+    RALLY_CANT_MULTI_REINFORCE_CITY     =                   15047,          // 您只能派出一支部队增援同一盟友
+    RALLY_CANT_MULTI_SAME_OBJECT        =                   15048,          // 多支部队无法同时朝同一目标行军
+
+    // 商栈相关
+    TRANSPORT_MAX_NUM                   =                   16000,          // 运输资源超出商栈上限
+    TRANSPORT_TARGET_NOT_BUILDING       =                   16001,          // 对方没有商栈建筑
+    TRANSPORT_TROOP_FULL                =                   16002,          // 部队已满
+    TRANSPORT_NOT_BUILDING              =                   16003,          // 没有商栈建筑，无法运输
+    TRANSPORT_NOT_EXIST                 =                   16004,          // 运输车不存在
+
+    // 远征相关
+    EXPEDITION_NO_OPEN                  =                   17000,          // 远征系统未开启
+    EXPEDITION_PRE_LEVEL_NOT_PASS       =                   17001,          // 前置关卡未通关
+    EXPEDITION_TROOPS_NUM_LESS          =                   17002,          // 部队数量小于1
+    EXPEDITION_TROOPS_FULL              =                   17003,          // 部队数量超出上限
+    EXPEDITION_HERO_NOT_FREE            =                   17004,          // 远征英雄非空闲状态
+    EXPEDITION_SOLDIER_NOT_ENOUGH       =                   17005,          // 士兵不足
+    EXPEDITION_ATTACK_SELF_ARMY         =                   17006,          // 不能攻击自己的队伍
+    EXPEDITION_SOLDIER_TOO_MUCH         =                   17007,          // 远征士兵太多
+    EXPEDITION_ARMY_NOT_EXIST           =                   17008,          // 队伍不存在
+    EXPEDITION_STARTING                 =                   17009,          // 当前已经有一场远征战斗
+}
+
+

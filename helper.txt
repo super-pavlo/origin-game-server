@@ -1,0 +1,1 @@
+docker build --rm -t centos:7 -f centos7.Dockerfile ./

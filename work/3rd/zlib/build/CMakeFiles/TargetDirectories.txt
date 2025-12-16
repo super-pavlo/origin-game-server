@@ -1,0 +1,2 @@
+/home/oc-server/3rd/zlib/build/CMakeFiles/zlib.dir
+/home/oc-server/3rd/zlib/build/CMakeFiles/zlibstatic.dir

@@ -1,0 +1,15 @@
+2024-12-15 17:37:40 [./server/game_server/Main.lua:141] [Error] ./3rd/skynet/lualib/skynet.lua:579: call failed
+stack traceback:
+	[C]: in function 'error'
+	./3rd/skynet/lualib/skynet.lua:579: in upvalue 'yield_call'
+	./3rd/skynet/lualib/skynet.lua:596: in function 'skynet.call'
+	(...tail calls...)
+	./server/game_server/Main.lua:33: in function <./server/game_server/Main.lua:19>
+	[C]: in function 'xpcall'
+	./server/game_server/Main.lua:139: in local 'start'
+	./3rd/skynet/lualib/skynet.lua:941: in function <./3rd/skynet/lualib/skynet.lua:938>
+	[C]: in function 'xpcall'
+	./3rd/skynet/lualib/skynet.lua:945: in function 'skynet.pcall'
+	./3rd/skynet/lualib/skynet.lua:949: in function 'skynet.init_service'
+	./3rd/skynet/lualib/skynet.lua:962: in upvalue 'f'
+	./3rd/skynet/lualib/skynet.lua:252: in function <./3rd/skynet/lualib/skynet.lua:251>

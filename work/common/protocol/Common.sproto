@@ -1,0 +1,803 @@
+#################################################公共协议结构定义#########################################
+
+#系统消息参数
+.SystemMsg {
+    languageId 0 : integer                              #语言包ID
+    args 1 : *string                                    #参数
+}
+
+#位置信息
+.PosInfo {
+    x 0 : integer                                       #X坐标
+    y 1 : integer                                       #Y坐标
+}
+
+#士兵信息
+.SoldierInfo {
+    id 0 : integer                                  #type*100+level
+    type 1 : integer                                #士兵类型
+    level 2 : integer                               #士兵等级
+    num 3 : integer                                 #士兵数量
+    minor 4 : integer                               #轻伤数量
+}
+
+#资源采集速度信息
+.CollectSpeedInfo {
+    collectSpeed 0 : integer                        #采集速度
+    collectTime 1 : integer                         #采集时间
+}
+
+#行军参数信息
+.MarchTargetArg {
+    pos 0 : PosInfo                                 #坐标
+    targetObjectIndex 1 : integer                   #目标索引ID
+    targetName 2 : string                           #目标名字
+    targetGuildName 3 : string                      #目标联盟简称
+    targetHolyLandId 4 : integer                    #目标圣地ID
+    targetObjectType 5 : integer                    #目标类型
+    targetMonsterCityId 6 : integer                 #目标野蛮人城寨ID
+    targetPos 7 : PosInfo                           #目标坐标
+    oldTargetObjectIndex 8 : integer                #旧的目标索引ID
+    targetResourceId 9 : integer                    #目标资源ID
+    targetGuildBuildType 10 : integer               #目标联盟建筑类型
+    targetMapItemType 11 : integer                  #目标符文名称
+    targetMonsterId 12 : integer                    #目标怪物ID
+}
+
+#已完成的任务信息
+.FinishTaskInfo {
+    taskId 0 : integer                              #任务ID
+}
+
+#统计信息
+.Statistics {
+    arg 0 : integer                                 #参数, -1为无参数
+    num 1 : integer                                 #数量
+}
+
+#任务统计信息
+.TaskStatistics {
+    type 0 : integer                                #任务类型
+    statistics 1 : *Statistics                      #统计信息
+}
+
+#科技信息
+.TechnologyInfo {
+    technologyType 0 : integer                      #科技类型
+    level 1 : integer                               #科技当前等级
+}
+
+#角色统计信息
+.RoleStatistics {
+    type 0 : integer                                #统计类型
+                                                    # 1 战斗胜利次数
+                                                    # 2 战斗失败次数
+                                                    # 3 阵亡士兵数
+                                                    # 4 侦查次数
+                                                    # 5 资源采集总量
+                                                    # 6 资源援助总量
+                                                    # 7 联盟帮助次数
+    num 1 : integer                                 #统计值
+}
+
+#章节任务信息
+.ChapterTaskInfo {
+    taskId 0 : integer                              #章节任务ID
+    status 1 : integer                              #-1 删除该章节任务 0 未完成 1 已完成
+}
+
+#地图迷雾信息
+.DenseFogInfo {
+    index 0 : integer                               #迷雾索引
+    rule 1 : integer                                #迷雾位权限
+}
+
+#增援信息
+.ReinforceArmyInfo {
+    reinforceRid 0 : integer                        #角色rid
+    armyIndex 1 : integer                           #军队索引
+    soldiers 2: *SoldierInfo(id)                    #士兵信息
+    mainHeroId 3 : integer                          #主将ID
+    mainHeroLevel 4 : integer                       #主将等级
+    deputyHeroId 5 : integer                        #副将ID
+    deputyHeroLevel 6 : integer                     #副将等级
+    arrivalTime 7 : integer                         #增援到达时间
+    name 8 : string                                 #角色名称
+    headId 9 : integer                              #角色头像
+    headFrameID 10 : integer                        #玩家头像框
+}
+
+#增援记录信息
+.ReinforceRecordInfo {
+    headId 0 : integer                              #头像ID
+    name 1 : string                                 #名字
+    arrivalTime 2 : integer                         #增援到达时间
+    armyCount 3 : integer                           #部队数量
+}
+
+#斥候队列信息
+.ScoutsInfo {
+    scoutsIndex 0 : integer                         #斥候索引
+    scoutsPos 1 : PosInfo                           #斥候位置
+    scoutsTargetIndex 2 : integer                   #斥候侦察目标
+    scoutsTargetPos 3 : PosInfo                     #斥候侦察位置
+    scoutsStatus 4 : integer                        #斥候状态
+    scoutsPath 5 : *PosInfo                         #斥候路径
+    startTime 6 : integer                           #出发时间
+    arrivalTime 7 : integer                         #到达时间
+    objectIndex 8 : integer                         #地图对象索引
+    denseFogNum 9 : integer                         #探索迷雾数量
+    leaveCityTime 10 : integer                      #斥候从城内离开时间
+}
+
+#山洞村庄探索信息
+.VillageCaveInfo {
+    index 0 : integer                               #索引
+    rule 1 : integer                                #探索位权限
+}
+
+#击杀数量
+.KillCount {
+    level 0 : integer                                   #击杀等级
+    count 1 : integer                                   #击杀数量
+}
+
+#城市buff信息
+.CityBuff {
+    id 0 : integer                                  # buffID
+    expiredTime 1 : integer                         # 过期时间, -1为永久
+}
+
+#活动信息
+.Activity {
+    activityId 0 : integer                          # 活动id
+    .ScheduleInfo {
+        type 0 : integer                            # 行为类型
+        .DataInfo {
+            condition 0 : integer                   # 
+                                                    #
+            count 1 : integer
+        } 
+        data 1 : *DataInfo(condition)       
+        lastLoginTime 2 : integer                   # 上次登陆时间
+        times 3 : integer                           # 建造时间
+    }
+    scheduleInfo 1 : *ScheduleInfo(type)            # 活动相关行为进度
+    startTime 2 : integer                           # 活动开始时间
+    rewardId 3 : *integer                           # 已领取奖励id
+    level 4 : integer                               # 活动开启时候市政厅等级
+    .Exchange {
+        id 0 : integer                              # 兑换ID
+        count 1 : integer                           # 兑换活动次数
+    }
+    exchange 5 : *Exchange(id)                      # 兑换活动次数 
+    score 6 : integer                               # 当前积分，执政官使用
+    rank 7 : integer                                # 当前排行，执政官使用
+    .Rewards {
+        index 0 : integer                           # id
+    }
+    rewards 8 : *Rewards(index)                     # 最强执政官领奖状态
+    rewardBox 9 : boolean                           # 开服活动宝箱是否已领取
+    stage 10 : integer                              # 最强执政官阶段
+    .Ranks {
+            index 0 : integer                           #阶段
+            rank 1 : integer                            #排行信息
+            score 2 : integer                           #分数
+        }
+    ranks 11 : *Ranks(index)                        #最强执政官结束展示
+    season 12 : integer                             #当前所属赛季
+    ids 13 : *integer                               #地狱活动使用
+    activeReward 14 : boolean                       #新手活动活跃度领奖状态
+    times 15 : integer                              #记录联盟建造时间
+    day 16 : integer                                #活跃度天数
+    count 17 : integer                              #转盘总抽取股次数
+    dayCount 18 : integer                           #每日转盘已抽取次数
+    free 19 : integer                               #转盘免费抽取次数
+    discount 20 : boolean                           #单抽每日折扣
+    isNew 21 :  boolean                             #是否是新活动
+}
+
+#聊天已读索引
+.ChatReadedUniqueIndex {
+    uniqueIndex 0 : integer                         #消息索引
+    channelType 1 : integer                         #频道类型
+}
+
+#聊天消息免打扰设置
+.ChatNoDisturbInfo {
+    chatNoDisturbFlag 0 : boolean                   #是否消息免打扰
+    channelType 1 : integer                         #频道类型
+}
+
+#驿站信息
+.MysteryStore {
+    .MysteryStoreGoods {
+        id 0 : integer                              #id
+        num 1 : integer                             #数量
+        discount 2 : integer                        #折扣
+        isBuy 3 : boolean                           #是否已经购买
+        price 4 : integer                           #价格
+    }
+    mysteryStoreGoods 0 : *MysteryStoreGoods(id)    #驿站道具信息
+    leaveTime 1 : integer                           #离开时间
+    refreshCount 2 : integer                        #本次刷新次数
+    freeRefresh 3 : boolean                         #是否免费刷新过
+}
+
+#充值信息
+.Recharge {
+    id 0 : integer
+    count 1 : integer                               #购买次数
+}
+
+#充值信息
+.RechargeSale {
+    group 0 : integer                               #对应礼包分组
+    ids 1 : *integer                                #对应id
+    buyTime 2 : integer                             #对应购买时间（刷新使用）
+}
+
+#城市补给站信息
+.Supply {
+    id 0 : integer                              #对应id
+    expiredTime 1 : integer                     #过期时间
+    award 2 : boolean                           #今日是否能领取
+    awardTime 3 : integer                       #上次领取时间 
+}
+
+#限时礼包信息
+.LimitTimePackage {
+    index 0 : integer                               #索引
+    id 1 : integer                                  #限时礼包id
+    expiredTime 2 : integer                         #过期时间
+}
+
+#VIP商店信息
+.VipStore {
+    id 0 : integer                              #vip表id
+    count 1 : integer                           #已购买个数
+}
+
+#远征商店信息
+.Expedition {
+    .ShopItem {
+        itemId 0 : integer
+        buyCount 1 : integer
+    }
+    shopItem 0 : *ShopItem(itemId)                  #道具信息
+    .Head {
+        itemId 0 : integer
+        buyCount 1 : integer
+    }
+    refreshCount 1 : integer                        #刷新次数
+    headCount 2 : integer                           #第三个头像购买次数
+}
+
+#远程通关信息
+.ExpeditionInfo {
+    id 0 : integer                                  #id
+    star 1 : integer                                #星级
+    reward 2 : boolean                              #今日是否领奖
+    finishTime 3 : integer                          #通关时间
+}
+
+#推送设置信息
+.PushSetting {
+    id 0 : integer                                  #消息推送分组
+    open 1 : integer                                #1 为打开 0 为关闭
+}
+
+#建筑信息
+.BuildingInfo {
+    buildingIndex 0 : integer                       #建筑索引
+    type 1 : integer                                #建筑类型
+    level 2 : integer                               #建筑等级
+    pos 3 : PosInfo                                 #建筑坐标     
+    finishTime 4 : integer                          #建造/升级结束时间 -1为已完成
+    version 5 : integer                             #对应建筑版本
+    lastRewardTime 6 : integer                      #上次获取资源时间
+    lostHp 7 : integer                              #扣除血量
+    beginBurnTime 8 : integer                       #开始燃烧的时间
+    serviceTime 9 : integer                         #上次维修的时间
+    lastBurnTime 10 : integer                       #上次燃烧时间，服务器重启使用
+    buildTime 11 : integer                          #完成建造时间
+    buildingGainInfo 12 : BuildingGainInfo          #资源信息
+}
+
+#道具信息
+.ItemInfo {
+    itemIndex 0 : integer                           #道具(装备)索引
+    uniqueIndex 1 : integer                         #唯一索引
+    itemId 2 : integer                              #道具ID
+    overlay 3 : integer                             #叠加数量
+    exclusive 4 : integer                           #专属，等于0则不是专属装备
+    heroId 5 : integer                              #装备该装备的英雄id
+}
+
+#技能信息
+.SkillInfo {
+    skillId 0 : integer                             #技能ID
+    skillLevel 1 : integer                          #技能等级
+}
+
+#统帅信息
+.HeroInfo {
+    heroId 0 : integer                              #统帅ID
+    star 1 : integer                                #星级
+    starExp 2 : integer                             #星级进度
+    level 3 : integer                               #等级
+    exp 4 : integer                                 #经验
+    summonTime 5 : integer                          #召唤时间
+    soldierKillNum 6 : integer                      #士兵击杀数量
+    savageKillNum 7 : integer                       #野蛮人击杀数量
+    skills 8 : *SkillInfo                           #技能信息
+    .TalentTrees {
+        index 0 : integer                           #分页
+        talentTree 1 : *integer                     #具体天赋
+        name 2 : string                             #天赋页名称
+    }
+    talentTrees 9 : *TalentTrees(index)             #天赋树
+    talentIndex 10 : integer                        #当前选择天赋页
+    head 11 : integer                               #头盔位装备索引
+    breastPlate 12 : integer                        #胸甲位装备索引
+    weapon 13 : integer                             #武器位装备索引
+    gloves 14 : integer                             #手套位装备索引
+    pants 15 : integer                              #裤子位装备索引
+    accessories1 16 : integer                       #饰品位装备索引
+    accessories2 17 : integer                       #饰品位装备索引
+    shoes 18 : integer                              #鞋子位装备索引
+}
+
+#采集报告信息
+.CollectReport {
+    resourceTypeId 0 : integer                          # type = 1时, 为s_ResourceGatherType表ID
+                                                        # type = 2时, 为s_AllianceBuildingType表ID
+    pos 1 : PosInfo                                     #资源点坐标
+    resource 2 : integer                                #资源采集量
+    extraResource 3 : integer                           #额外资源采集数量
+    type 4 : integer                                    # 1 资源田 2 联盟资源中心
+}
+
+#奖励道具信息
+.RewardItem {
+    itemId 0 : integer                                  #道具ID
+    itemNum 1 : integer                                 #道具数量
+}
+
+#联盟礼物信息
+.GuildGift {
+    giftType 0 : integer                                #礼物类型
+    giftNum 1 : integer                                 #礼物数量
+}
+
+#英雄信息
+.Heros {
+        heroId 0 : integer                              #英雄id
+        num 1 : integer                                 #个数
+        isNew 2 : integer                               #新英雄个数
+    }
+
+#奖励信息
+.RewardInfo {
+    food 0 : integer                                    #粮食
+    wood 1 : integer                                    #木材
+    stone 2 : integer                                   #石料
+    gold 3 : integer                                    #金币
+    denar 4 : integer                                   #宝石
+    items 5 : *RewardItem                               #道具
+    soldiers 6 : *SoldierInfo                           #士兵
+    groupId 7 : integer                                 #奖励组ID
+    actionForce 8 : integer                             #行动力
+    guildGifts 9 : *GuildGift                           #联盟礼物信息
+    heros 10 : *Heros                                   #统帅
+    expeditionCoin 11 : integer                         #远征币
+    guildPoint 12 : integer                             #联盟个人积分
+    vip 13 : integer                                    #vip点数
+    leaguePoints 14 : integer                           #联盟积分
+    activityActivePoint 15 : integer                    #新手活动活跃度
+}
+
+#战斗报告信息
+.BattleReport {
+    attackArmyCount 0 : integer                         #进攻方剩余部队数量
+    defenseArmyCount 1 : integer                        #防御方剩余部队数量
+    attackIndex 2 : integer                             #攻击对象索引
+    defenseIndex 3 : integer                            #防御对象索引
+    reportUniqueIndex 4 : integer                       #唯一索引
+
+    #以下为文字战报使用
+    damage 5 : integer                                  #伤害
+    beatBackDamage 6 : integer                          #反击伤害
+    heal 7 : integer                                    #治疗
+    skillId 8 : integer                                 #技能ID
+    addBuffs 9 : *integer                               #添加的BUFF
+    removeBuffs 10 : *integer                           #移除的BUFF
+    turn 11 : integer                                   #发生的回合
+}
+
+#战斗部队损伤信息
+.BattleSoldierHurt {
+    soldierId 0 : integer                               #士兵ID
+    minor 1 : integer                                   #轻伤
+    hardHurt 2 : integer                                #重伤
+    die 3 : integer                                     #死亡
+    remain 4 : integer                                  #剩余
+    heal 5 : integer                                    #治疗
+}
+
+#战斗部队损伤信息(集结驻防多部队)
+.BattleRallySoldierHurtDetail {
+    armyIndex 0 : integer                                   #部队索引
+    mainHeroId 1 : integer                                  #主将ID
+    deputyHeroId 2 : integer                                #副将ID
+    mainHeroLevel 3 : integer                               #主将等级
+    deputyHeroLevel 4 : integer                             #副将等级
+    rallySoldierDetail 5 : *BattleSoldierHurt(soldierId)    #部队损失信息
+    joinTime 6 : integer                                    #加入时间
+}
+
+#战斗部队损伤信息(集结驻防多部队)
+.BattleRallySoldierHurt {
+    rallyRid 0 : integer                                                    #集结部队角色rid
+    rallyHurt 1 : *BattleRallySoldierHurtDetail(armyIndex)                  #部队损失信息
+    rallyRoleName 2 : string                                                #集结部队角色名字
+    isLeader 3 : boolean                                                    #是否是队长或者城主
+}
+
+#同目标战斗的部队损伤信息
+.BattleSoldierHurtWithObject {
+    targetObjectIndex 0 : integer                                           #目标对象索引
+    battleSoldierHurt 1 : *BattleSoldierHurt(soldierId)                     #自己的损伤信息
+}
+
+#战斗报告额外单位信息
+.BattleReportExDetail {
+    rid 0 : integer                                                         #角色rid
+    name 1 : string                                                         #角色名字
+    objectType 2 : integer                                                  #对象类型
+    headId 3 : integer                                                      #头像ID
+    beginArmyCount 4 : integer                                              #战斗开始部队数量
+    endArmyCount 5 : integer                                                #战斗结束部队数量
+    maxArmyCount 6 : integer                                                #最大部队数量
+    pos 7 : PosInfo                                                         #坐标
+    hurt 8 : integer                                                        #受到伤害
+    mainHeroId 9 : integer                                                  #主将ID
+    deputyHeroId 10 : integer                                               #副将ID
+    mainHeroLevel 11 : integer                                              #主将等级
+    deputyHeroLevel 12 : integer                                            #副将等级
+    soldierDetail 13 : *BattleSoldierHurtWithObject(targetObjectIndex)      #部队损失信息
+    monsterId 14 : integer                                                  #怪物ID
+    objectIndex 15 : integer                                                #对象索引
+    guildId 16 : integer                                                    #对象联盟ID
+    holyLandBuildMonsterId 17 : integer                                     #圣地建筑怪物ID
+    guildName 18 : string                                                   #联盟名称
+    battleRallySoldierHurt 19 : *BattleRallySoldierHurt(rallyRid)           #自己的损伤信息(集结驻防多部队,用于显示部队详情)
+}
+
+#战斗中增援部队信息
+.BattleReinforceArmy {
+    time 0 : integer                                                        #unix时间戳
+    headId 1 : integer                                                      #头像ID
+    headFrameID 2 : integer                                                 #头像框ID
+    armyCount 3 : integer                                                   #部队数量
+    guildId 4 : integer                                                     #联盟ID
+    name 5 : string                                                         #名字
+    isCityJoin 6 : boolean                                                  #是否是城市训练加入
+    isArmyBack 7 : boolean                                                  #是否是部队回城
+}
+
+#战斗战报详细信息
+.BattleReportWithObjectIndex {
+    targetObjectIndex 0 : integer                                           #目标对象索引
+    battleDamageHeal 1 : *BattleReport                                      #战斗详细伤害信息
+    battleBeginTime 2 : integer                                             #战斗开始时间
+    battleEndTime 3 : integer                                               #战斗结束时间
+}
+
+#战斗报告额外信息
+.BattleReportEx {
+    objectInfos 0 : *BattleReportExDetail(objectIndex)                      #战斗对象信息
+    battleBeginTime 1 : integer                                             #战斗开始时间
+    battleEndTime 2 : integer                                               #战斗结束时间
+    battleType 3 : integer                                                  #战斗类型
+    rewardInfo 4 : RewardInfo                                               #奖励信息
+    winObjectIndex 5 : integer                                              #胜利对象索引
+    mainHeroExp 6 : integer                                                 #主将获得经验
+    deputyHeroExp 7 : integer                                               #副将获得经验
+    reinforceJoinArmy 8 : *BattleReinforceArmy                              #增援加入信息
+    reinforceLeaveArmy 9 : *BattleReinforceArmy                             #增援离开信息
+    battleReport 10 : *BattleReportWithObjectIndex(targetObjectIndex)       #战斗伤害信息
+}
+
+#探索发现报告信息
+.DiscoverReportInfo {
+    pos 0 : PosInfo                                     #坐标
+    mapFixPointId 1 : integer                           #村庄山洞ID(s_MapFixPoint表ID)
+    strongHoldType 2 : integer                          #s_StrongHoldType表ID
+}
+
+#货币类型信息
+.CurrencyInfo {
+    type 0 : integer                                    #s_Currency表ID
+    num 1 : integer                                     #货币数量
+}
+
+#联盟捐献信息
+.RoleDonateInfo {
+    name 0 : string                                     #角色名称
+    donateNum 1 : integer                               #捐献值
+}
+
+#联盟不活跃成员信息
+.InactiveMembersInfo {
+    rid 0 : integer                                     #角色ID
+    name 1 : string                                     #角色名称
+    headId 2 : integer                                  #角色头像
+    headFrameID 3 : integer                             #角色头像边框
+    lastLogoutTime 4 : integer                          #最后登出时间
+}
+
+#联盟邮件信息
+.GuildEmailInfo {
+    guildId 0 : integer                                 #联盟ID
+    signs 1 : *integer                                  #联盟旗帜标志
+    roleName 2 : string                                 #角色名称
+    roleHeadId 3 : integer                              #角色头像
+    roleHeadFrameId 4 : integer                         #角色头像边框
+    buildCostGuildCurrencies 5 : *CurrencyInfo          #消耗的联盟货币信息
+    roleDonates 6 : *RoleDonateInfo                     #联盟捐献排名信息
+    transportResource 9 : *CurrencyInfo                 #运送的资源信息
+    inviteStatus 10 : integer                           #联盟邀请点击状态: 0 未处理 1 已同意 2 已拒绝
+    technologyId 11 : integer                           #科技ID
+    guildAbbName 12 : string                            #联盟简称
+    roleRid 13 : integer                                #角色ID
+    boardMessageIndex 14 : integer                      #联盟留言板留言索引
+    strongHoldId 15 : integer                           #圣地关卡ID
+    markerId 16 : integer                               #联盟书签标记ID
+    markerDesc 17 : string                              #联盟书签描述
+    pos 18 : PosInfo                                    #坐标
+    inactiveMembers 19 : *InactiveMembersInfo           #联盟不活跃成员列表
+}
+
+#侦查角色信息
+.ScoutRoleInfo {
+    rid 0 : integer                                     #角色ID
+    name 1 : string                                     #名称
+    headId 2 : integer                                  #头像ID
+    headFrameID 3 : integer                             #头像框
+}
+
+#驻防统帅信息
+.DefendHeroInfo {
+    heroId 0 : integer                                  #统帅ID
+    skills 1 : *SkillInfo                               #统帅技能
+    star 2 : integer                                    #星级
+}
+
+#侦查报告信息
+.ScoutReportInfo {
+    targetType 0 : integer                              #侦查目标类型 1 玩家城市 2 玩家部队 3 集结部队 4 玩家采集点 5 联盟建筑 6 关卡 7 圣地
+    pos 1 : PosInfo                                     #坐标
+    # 模块一
+    guildAbbName 2 : string                             #联盟简称, 空为不在联盟中
+    objectTypeId 3 : integer                            # targetType = 5时, objectTypeId 为 s_AllianceBuildingType表type值
+                                                        # targetType = 6或7时, objectTypeId 为 s_StrongHoldData表ID值
+    scoutRole 4 : ScoutRoleInfo                         #角色信息
+    # 模块二
+    cityWallDurable 5 : integer                         #城墙耐久
+    cityWallDurableLimit 6 : integer                    #城墙耐久上限
+    armyDisband 7 : boolean                             #侦查的部队是否被解散
+    # 模块三
+    robFood 8 : integer                                 #可掠夺的粮食
+    robWood 9 : integer                                 #可掠夺的木材
+    robStone 10 : integer                               #可掠夺的石料
+    robGold 11 : integer                                #可掠夺的金币
+    # 模块四
+    mainHero 12 : DefendHeroInfo                        #主将信息
+    deputyHero 13 : DefendHeroInfo                      #副将信息
+    armySumType 14 : integer                            # 1 不详 2 大概数量不显示ICON 3 大概数量显示ICON 4 精确数量
+    armySum 15 : integer                                #士兵总数
+    soldiers 16 : *SoldierInfo                          #士兵信息
+    # 模块五
+    reinforceArmySumType 17 : integer                   # 1 不详 2 大概数量 3 准确数量
+    reinforceSoldiers 18 : *SoldierInfo                 #增援的士兵信息
+    # 模块六
+    rallyMainHero 19 : DefendHeroInfo                   #集结主将信息
+    rallyDeputyHero 20 : DefendHeroInfo                 #集结副将信息
+    rallyArmySumType 21 : integer                       # 1 大概数量 2 精确数量 3 无正在集结的部队
+    rallySoldiers 22 : *SoldierInfo                     #集结士兵信息
+    # 模块七
+    guardTowerLevel 23 : integer                        #警戒塔等级
+    guardTowerHp 24 : integer                           #警戒塔当前生命值
+    guardTowerHpLimit 25 : integer                      #警戒塔上限
+    guildFlagSigns 26 : *integer                        #联盟旗帜标识
+    robResourceType 27 : integer                        # 1 不显示可掠夺资源 2 显示可掠夺资源
+    roleAge 28 : integer                                #所处时代
+}
+
+#发件人信息
+.SenderInfo {
+    rid 0 : integer                                    #发件人rid
+    name 1 : string                                    #发件人名字
+    guildId 2 : integer                                #公会id
+    guildAbbr 3 : string                               #公会缩写
+    headId 4 : integer                                 #头像id
+    headFrameID 5 : integer                            #头像底框
+}
+
+#洛哈奖励列表
+.RoleList {
+    rid 0 : integer                                     #角色id
+    name 1 : string                                     #角色名
+    headId 2 : integer                                  #头像ID
+    headFrameID 3 : integer                             #头像框ID
+    rewardInfo 4 : RewardInfo                           #奖励信息
+}
+
+#邮件信息
+.EmailInfo {
+    emailIndex 0 : integer                              #邮件索引
+    emailId 1 : integer                                 #邮件ID, -1为删除
+    sendTime 2 : integer                                #邮件发送时间
+    status 3 : integer                                  # 0 未阅读 1 已阅读
+    takeEnclosure 4 : boolean                           #附件是否已领取
+    isCollect 5 : boolean                               #是否收藏
+    resourceCollectReport 6 : CollectReport             #资源采集报告
+    subType 7 : integer                                 #邮件子类型: 1 资源采集报告 2 战斗报告信息 3 探索发现报告
+    rewards 8 : RewardInfo                              #奖励信息
+    discoverReport 9 : DiscoverReportInfo               #探索发现报告信息
+    acitonForceReturn 10 : integer                      #返还行动力
+    battleReportEx 11 : string                          #战斗报告额外信息url
+    emailContents 12 : *string                          #邮件内容
+    titleContents 13 : *string                          #标题内容
+    subTitleContents 14 : *string                       #副标题内容
+    guildEmail 15 : GuildEmailInfo                      #联盟邮件信息
+    senderInfo 16 : SenderInfo                          #发件人信息
+    scoutReport 17 : ScoutReportInfo                    #侦查报告信息
+    reportSubTile 18 : *string                          #战报副标题
+    battleReportExContent 19 : BattleReportEx           #战斗报告额外信息(具体内容,在url上传失败的时候会填充此内容)
+    reportStatus 20 : integer                           #邮件战报读取(0为都不读取,1为读取url,2为读取content)
+    mainHeroId 21 : integer                             #主将ID(战报时有效)
+    roleList 22 : *RoleList                             #角色奖励信息
+}
+
+#资源信息
+.TransportResourceInfo {
+    resourceTypeId 0 : integer                      #资源类型ID
+    load 1 : integer                                #资源负载量
+}
+
+#运输车信息
+.TransportInfo {
+    transportIndex 0 : integer                              # 部队索引
+    transportResourceInfo 1 : *TransportResourceInfo        # 运输资源信息
+    allResourceInfo 2 : *TransportResourceInfo              # 总资源
+    arrivalTime 3 : integer                                 # 到达时间
+    path 4 : *PosInfo                                       # 路径
+    startTime 5 : integer                                   # 出发时间
+    objectIndex 6 : integer                                 # 地图对象索引
+    targetPos 7 : PosInfo                                   # 坐标
+    targetObjectIndex 8 : integer                           # 目标索引ID
+    targetName 9 : string                                   # 目标名称
+    transportStatus 10 : integer                            # 状态
+    targetRid 11 : integer                                  # 目标rid
+}
+
+#角色联盟领地收益信息
+.RoleTerritoryGainInfo {
+    type 0 : integer                                    #角色粮食等货币类型
+    num 1 : integer                                     #当前数字
+    territoryTime 2 : integer                           #领土资源变化时间
+    limit 3 : integer                                   #可领取的资源量上限
+}
+
+#联盟申请信息
+.GuildApplyInfo {
+    rid 0 : integer                                     #角色ID
+    name 1 : string                                     #名称
+    headId 2 : integer                                  #角色头像
+    combatPower 3 : integer                             #战力
+    killCount 4 : integer                               #击杀
+    applyTime 5 : integer                               #申请时间
+    headFrameID 6 : integer                             #玩家头像框
+}
+
+#联盟官员信息
+.GuildOfficerInfo {
+    officerId 0 : integer                               #s_AllianceOfficially表ID
+    rid 1 : integer                                     #角色ID, 0或空为官职未任命
+    appointTime 2 : integer                             #上次任命时间
+}
+
+#联盟货币信息
+.GuildCurrencyInfo {
+    type 0 : integer                                    #货币类型, s_Currency表ID
+    num 1 : integer                                     #当前数量
+    limit 2 : integer                                   #上限
+    produce 3 : integer                                 #产量
+    lastProduceTime 4 : integer                         #上次领取联盟产量时间
+}
+
+#消耗货币信息
+.ConsumeCurrencyInfo {
+    type 0 : integer                                    #货币类型, s_Currency表ID
+    num 1 : integer                                     #消耗货币数量
+}
+
+#联盟货币消耗记录信息
+.GuildConsumeRecordInfo {
+    roleHeadId 0 : integer                              #操作的角色头像
+    roleName 1 : string                                 #角色名称
+    consumeType 2 : integer                             #消耗类型 1 修改建筑 2 研究科技
+    consumeArgs 3 : *integer                            #consumeType = 1, consumeArgs为建筑类型
+                                                        #consumeType = 2, consumeArgs为科技类型、等级
+    consumeCurrencies 4 : *ConsumeCurrencyInfo(type)    #消耗货币信息
+    consumeTime 5 : integer                             #操作时间
+    roleHeadFrameID 6 : integer                         #玩家头像框
+}
+
+#帮助角色信息
+.HelpInfo {
+    rid 0 : integer                                     #帮助角色ID
+}
+
+#联盟求助信息
+.GuildRequestHelpInfo {
+    index 0 : integer                                   #索引
+    rid 1 : integer                                     #求助角色ID
+    type 2 : integer                                    #求助类型
+    args 3 : *integer                                   #求助参数
+    helpNum 4 : integer                                 #帮助次数
+    helpLimit 5 : integer                               #帮助上限
+    reduceTime 6 : integer                              #减少事件(自己求助才有此属性)
+    helps 7 : *HelpInfo(rid)                            #帮助角色信息(服务器使用)
+    needTime 8 : integer                                #需要总时间(服务器使用)
+    queueIndex 9 : integer                              #角色队列索引(服务器使用)
+}
+
+#历届执政官信息
+.HistoryInfo {
+    name 1 : string                                     #名字
+    abbreviationName 2 : string                         #联盟简称
+    score 3 : integer                                   #分数
+    rank 4 : integer                                    #排行
+}
+
+#留言角色信息
+.MessageRoleInfo {
+    rid 0 : integer                                     #角色ID
+    name 1 : string                                     #名称
+    headId 2 : integer                                  #头像ID
+    headFrameID 3 : integer                             #头像框ID
+    guildAbbName 4 : string                             #联盟简称，无则为空
+}
+
+#留言信息
+.BoardMessageInfo {
+    messageIndex 0 : integer                            #留言索引
+    roleInfo 1 : MessageRoleInfo                        #留言角色信息
+    floorId 2 : integer                                 #层ID, 0为回复
+    replyMessageIndex 3 : integer                       #回复的留言索引
+    sendTime 4 : integer                                #发送时间
+    content 5 : string                                  #留言内容
+    subFloors 6 : *BoardMessageInfo                     #回复信息(客户端用)
+}
+
+#资源建筑收益信息
+.BuildingGainInfo {
+    type 0 : integer                                    #资源类型
+    num 1 : integer                                     #当前数字
+    changeTime 2 : integer                              #领土资源变化时间
+}
+
+#个人书签信息
+.MapMarkerInfo {
+    markerIndex 0 : integer                             #书签索引
+    markerId 1 : integer                                #书签ID
+    description 2 : string                              #描述
+    gameNode 3 : string                                 #服务器编号
+    pos 4 : PosInfo                                     #坐标
+    markerTime 5 : integer                              #添加书签时间
+    status 6 : integer                                  #-1 删除书签 0 未读书签 1 已读书签
+    createName 7 : string                               #创建者名称
+}
