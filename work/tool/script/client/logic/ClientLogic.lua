@@ -1,2 +1,0 @@
-local ClientLogic = {}
-return ClientLogic
